@@ -239,13 +239,13 @@ def _bump(cfg: config.Config, new_version: str, allow_dirty: bool = False) -> No
     for filepath in filepaths:
         _vcs.add(filepath)
 
-    _vcs.commit(f"bump version to {new_version}")
+    _vcs.commit(f":bookmark: Bump Version to {new_version}")
 
     if cfg.commit and cfg.tag:
-        _vcs.tag(new_version)
+        _vcs.tag(version.to_pep440(str(new_version)))
 
     if cfg.commit and cfg.tag and cfg.push:
-        _vcs.push(new_version)
+        _vcs.push(version.to_pep440(str(new_version)))
 
 
 def _try_bump(cfg: config.Config, new_version: str, allow_dirty: bool = False) -> None:
